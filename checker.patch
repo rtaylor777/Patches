@@ -1,0 +1,37 @@
+--- checker.py	2018-06-11 19:24:37.000000000 -0700
++++ checker.py.new	2018-06-11 19:19:24.000000000 -0700
+@@ -10,7 +10,7 @@
+ - check target if MS17-010 is patched or not.
+ - find accessible named pipe
+ '''
+-
++# if you wish to provide credentials see the command line paramters
+ USERNAME = ''
+ PASSWORD = ''
+ 
+@@ -31,14 +31,23 @@
+ }
+ 
+ 
+-if len(sys.argv) != 2:
+-	print("{} <ip>".format(sys.argv[0]))
++if len(sys.argv) < 2:
++	print("{} <ip> [USERNAME] [PASSWORD]".format(sys.argv[0]))
+ 	sys.exit(1)
++if len(sys.argv) >= 3:
++	USERNAME = sys.argv[2]
++	if len(sys.argv) > 3:
++		PASSWORD = sys.argv[3]
++# If you wish to provide credentials you can enter them on the command line
++# and avoid having to edit this script. They are optional parameters.
++
+ 
+ target = sys.argv[1]
+ 
+ conn = MYSMB(target)
+ try:
++	if USERNAME != "":
++		print("Connecting with user '" + USERNAME + "' and password '" + PASSWORD + "'")
+ 	conn.login(USERNAME, PASSWORD)
+ except smb.SessionError as e:
+ 	print('Login failed: ' + nt_errors.ERROR_MESSAGES[e.error_code][0])
