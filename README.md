@@ -1,6 +1,6 @@
 # Patches
-Some Useful Patches
-Creating the patch:
-diff -Naur original.txt new.txt > diff.patch
-Using the patch:
-patch original.txt diff.patch
+Some Useful Patches<br />
+##Creating the patch:<br />
+diff -Naur original.txt new.txt > diff.patch<br />
+##Using the patch:<br />
+patch original.txt diff.patch<br />
